@@ -7,6 +7,9 @@ export default function App() {
     const cantDecrementAlert = () =>
         Alert.alert("Erro!", "Não é possível zerar o que já é zero!!!");
 
+    const cantIncrementAlert = () =>
+        Alert.alert("Erro!", `Não é possível incrementar, já está no máximo de ${max}!!!`);
+
     const handleSetToZero = () => {
         if (counter === 0) {
             return cantDecrementAlert();
@@ -16,8 +19,8 @@ export default function App() {
     };
 
     const handleIncrecrement = () => {
-        if (counter === max) {
-            return;
+        if (counter >= max) {
+            return cantIncrementAlert();
         }
 
         setCounter(counter + 1);
@@ -29,6 +32,14 @@ export default function App() {
         }
 
         setCounter(counter - 1);
+    };
+
+    const handleDuplicate = () => {
+        if (counter >= max) {
+            return cantIncrementAlert();
+        }
+
+        setCounter(counter * 2);
     };
 
     return (
@@ -50,6 +61,14 @@ export default function App() {
                         onPress={() => handleIncrecrement()}
                         title="Incrementar"
                         color="#43aa8b"
+                        style={styles.button}
+                    />
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={() => handleDuplicate()}
+                        title="Duplicar"
+                        color="#3a86ff"
                         style={styles.button}
                     />
                 </View>
